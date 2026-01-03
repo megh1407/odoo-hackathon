@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container large">
+  <h2>Employee Dashboard</h2>
+  <p class="subtitle">View your profile and leave records</p>
+
+  <h3>Welcome, <span id="emp"></span></h3>
+
+  <a href="profile.html">My Profile</a>
+  <a href="leaves.html">My Leaves</a>
+
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+if(!user || user.role!=="employee") location.href="login.html";
+
+emp.innerText = user.name;
+function logout(){
+  localStorage.clear();
+  location.href="login.html";
+}
+</script>
+
+</body>
+</html>

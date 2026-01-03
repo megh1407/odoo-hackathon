@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leave Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container large">
+  <h2>Leave Management</h2>
+  <p class="subtitle">Apply and track leave requests</p>
+
+  <input id="empId" placeholder="Employee ID">
+  <input id="type" placeholder="Leave Type">
+  <input type="date" id="from">
+  <input type="date" id="to">
+
+  <button onclick="applyLeave()">Apply Leave</button>
+  <p id="msg"></p>
+
+  <hr>
+
+  <button onclick="getLeaves()">Load Leaves</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Name</th><th>Type</th><th>From</th><th>To</th><th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="data"></tbody>
+  </table>
+
+  <a href="dashboard_admin.html">Back</a>
+</div>
+
+<script>
+async function applyLeave(){
+  const r = await fetch("http://localhost:5000/leaves",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({
+      employee_id:empId.value,
+      type:type.value,
+      from_date:from.value,
+      to_date:to.value
+    })
+  });
+  msg.innerText = (await r.json()).message;
+}
+
+async function getLeaves(){
+  const d = await (await fetch("http://localhost:5000/leaves")).json();
+  data.innerHTML="";
+  d.forEach(l=>{
+    data.innerHTML+=`
+      <tr>
+        <td>${l.id}</td><td>${l.name}</td><td>${l.type}</td>
+        <td>${l.from_date}</td><td>${l.to_date}</td><td>${l.status}</td>
+      </tr>`;
+  });
+}
+</script>
+
+</body>
+</html>

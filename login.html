@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - HRMS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Welcome Back</h2>
+  <p class="subtitle">Login to access your HRMS dashboard</p>
+
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <p id="msg"></p>
+  <a href="register.html">Create a new account</a>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async(e)=>{
+  e.preventDefault();
+
+  const res = await fetch("http://localhost:5000/auth/login",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({
+      email:email.value,
+      password:password.value
+    })
+  });
+
+  const data = await res.json();
+  msg.innerText = data.message;
+
+  if(data.user){
+    localStorage.setItem("user",JSON.stringify(data.user));
+    location.href = data.user.role==="admin"
+      ? "dashboard_admin.html"
+      : "dashboard_employee.html";
+  }
+});
+</script>
+
+</body>
+</html>

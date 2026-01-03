@@ -1,0 +1,272 @@
+/* =========================
+   RESET & FONT
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* =========================
+   COLOR SYSTEM
+========================= */
+:root {
+    --primary: #1e88e5;
+    --primary-dark: #0b5ed7;
+    --primary-glow: rgba(30,136,229,0.35);
+    --bg-main: #f1f6ff;
+    --card: #ffffff;
+    --text-main: #1f2933;
+    --text-muted: #6b7280;
+    --border: #e2e8f0;
+    --danger: #dc2626;
+}
+
+/* =========================
+   BODY (LOGIN WOW EFFECT)
+========================= */
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top right, #cfe3ff, transparent 40%),
+        radial-gradient(circle at bottom left, #b6d4ff, transparent 45%),
+        linear-gradient(135deg, #e9f2ff, #f6faff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+}
+
+/* =========================
+   CARD / CONTAINER
+========================= */
+.container,
+.page-container {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 38px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.12),
+        0 4px 10px rgba(0,0,0,0.05);
+    animation: fadeScale 0.6s ease;
+}
+
+.container.large,
+.page-container {
+    max-width: 1100px;
+}
+
+/* =========================
+   HEADINGS (LOGIN FOCUS)
+========================= */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+    letter-spacing: -0.4px;
+}
+
+h3 {
+    font-size: 18px;
+    color: var(--primary);
+    margin: 22px 0 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+/* =========================
+   FORMS (LOGIN POLISH)
+========================= */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+select {
+    margin-top: 14px;
+    padding: 14px 16px;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #fbfdff;
+    transition: all 0.25s ease;
+}
+
+input::placeholder {
+    color: #9aa5b1;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: white;
+    box-shadow: 0 0 0 5px var(--primary-glow);
+}
+
+/* =========================
+   BUTTON (LOGIN HERO)
+========================= */
+button {
+    margin-top: 22px;
+    padding: 15px;
+    border-radius: 14px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #1e88e5, #4dabf7);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+/* Shine animation */
+button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.45),
+        transparent
+    );
+    transition: 0.7s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 16px 35px rgba(30,136,229,0.45),
+        0 0 0 2px rgba(30,136,229,0.15);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* =========================
+   LINKS (LOGIN FOOTER)
+========================= */
+a {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   MESSAGE TEXT
+========================= */
+#msg {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--danger);
+}
+
+/* =========================
+   TABLES (DASHBOARD SAFE)
+========================= */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+table thead {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: white;
+}
+
+table th,
+table td {
+    padding: 14px;
+    font-size: 14px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid var(--border);
+}
+
+table tbody tr:nth-child(even) {
+    background: #f5f9ff;
+}
+
+table tbody tr:hover {
+    background: #e8f2ff;
+}
+
+/* =========================
+   HR
+========================= */
+hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 30px 0;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+@keyframes fadeScale {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 600px) {
+    .container,
+    .page-container {
+        margin: 20px;
+        padding: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}

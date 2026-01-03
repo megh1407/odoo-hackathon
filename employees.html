@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employees</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container large">
+  <h2>Employee Management</h2>
+  <p class="subtitle">View and add employees in the organization</p>
+
+  <button onclick="getEmployees()">Load Employees</button>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Email</th><th>Position</th><th>Salary</th>
+        </tr>
+      </thead>
+      <tbody id="tableData"></tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <h3>Add New Employee</h3>
+
+  <div class="form-grid">
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <input id="position" placeholder="Position">
+    <input id="salary" placeholder="Salary">
+  </div>
+
+  <button onclick="addEmployee()">Add Employee</button>
+  <p id="msg"></p>
+
+  <a href="dashboard_admin.html">Back to Dashboard</a>
+</div>
+
+<script>
+async function getEmployees(){
+  const d = await (await fetch("http://localhost:5000/employees")).json();
+  tableData.innerHTML="";
+  d.forEach(e=>{
+    tableData.innerHTML+=`
+      <tr>
+        <td>${e.id}</td><td>${e.name}</td><td>${e.email}</td>
+        <td>${e.position}</td><td>${e.salary}</td>
+      </tr>`;
+  });
+}
+
+async function addEmployee(){
+  await fetch("http://localhost:5000/employees",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({
+      name:name.value,
+      email:email.value,
+      position:position.value,
+      salary:salary.value
+    })
+  });
+  msg.innerText="Employee added successfully";
+  getEmployees();
+}
+</script>
+
+</body>
+</html>

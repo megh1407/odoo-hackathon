@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container large">
+  <h2>Admin Dashboard</h2>
+  <p class="subtitle">Manage employees, leaves and system data</p>
+
+  <h3>Welcome, <span id="adminName"></span></h3>
+
+  <a href="employees.html">Manage Employees</a>
+  <a href="leaves.html">Leave Management</a>
+
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+if(!user || user.role!=="admin") location.href="login.html";
+
+adminName.innerText = user.name;
+function logout(){
+  localStorage.clear();
+  location.href="login.html";
+}
+</script>
+
+</body>
+</html>
